@@ -3,11 +3,22 @@ import './App.css';
 import  Header from "./MyComponents/Header";
 import {ToDos} from "./MyComponents/ToDos";
 import {Footer} from "./MyComponents/Footer";
+import {AddTodo} from "./MyComponents/AddTodo";
+
+import React,{useState} from 'react';
 function App() {
+ 
   const onDelete = (todo)=>{
     console.log("I am on delete of",todo);
+
+    setTodos(todos.filter((e)=>{
+    return e!==todo;
+    }));
   }
-  let todos=[
+  const addTodo=(title,desc)=>{
+    console.log("I am adding todo",title,desc)
+  }
+  const [todos,setTodos]=useState([
     {
       sno:1,
       title:"Go to the market",
@@ -23,10 +34,11 @@ function App() {
       title:"Go to the house",
       desc:"You need to go to the house to get the job done"
     },
-  ]
+  ]);
   return (
     <>
     <Header  searchbar={true}/>
+    <AddTodo addTodo={addTodo}/>
     <ToDos todos={todos} onDelete={onDelete}/>
     <Footer/>
     </>
